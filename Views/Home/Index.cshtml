@@ -24,8 +24,23 @@
                     Html.DisplayFor(modelItem => film.Name);
                 }
              </h2>
-            <div class="film-info"><p>Date de sortie : </p><p> - </p><p>Note / 5</p></div>
-            <p>Descrption</p>
+            <div class="film-info">
+                <p>
+                    Date de sortie : @{
+                    Html.DisplayFor(modelItem => film.DateSortie);
+                }
+            </p><p> - </p><p>@{
+                    Html.DisplayFor(modelItem => film.Note);
+                } / 5</p>
+                <p> - </p><p>@{
+                    Html.DisplayFor(modelItem => film.Genre);
+                }</p>
+        </div>
+            <p>
+                @{
+                    Html.DisplayFor(modelItem => film.Description);
+                }
+            </p>
             <img src="" />
         </div>
     </div>
