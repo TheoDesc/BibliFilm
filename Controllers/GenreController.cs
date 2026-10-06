@@ -2,18 +2,18 @@
 
 namespace BibliFilm.Controllers
 {
-    public class FilmController : Controller
+    public class GenreController : Controller
     {
-        // GET : Film
+        // GET : Genre
         public IActionResult Index()
         {
             return View();
         }
 
-        // GET : Film par id
+        // GET : Genre/GetById
         public IActionResult GetById(int id)
         {
-            return Ok("Film avec l'id : " + id);
+            return Ok("Genre avec l'id : " + id);
         }
     }
 }
