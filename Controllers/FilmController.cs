@@ -5,8 +5,9 @@ namespace BibliFilm.Controllers
     public class FilmController : Controller
     {
         // GET : Film
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var films = await _filmService.GetAllFilms();
             return View();
         }
 
