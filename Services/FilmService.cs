@@ -1,18 +1,41 @@
-﻿using BibliFilm.Models.Entities;
+﻿using BibliFilm.Data;
+using BibliFilm.Models.Entities;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 
 namespace BibliFilm.Services
 {
-    private readonly FilmContext _context;
+    public class FilmService : IFilmService
+    {
+        private readonly FilmContext _filmService;
 
         public FilmService(FilmContext context)
         {
-            _context = context;
+            _filmService = context;
         }
 
-        public async Task<List<Film>> GetAllAsync() => await _context.Film
+        public async Task<List<Film>> GetAllAsync() =>
+            await _filmService.Films
                 .AsNoTracking()
-                .OrderBy(s => s.Name)
+                .OrderBy(f => f.Name)
                 .ToListAsync();
 
-        public async Task<Film?> GetByIdAsync(Guid id) => await _context.Films.FindAsync(id);
+        public async Task<Film?> GetByIdAsync(int id) =>
+            await _filmService.Films.FindAsync(id);
+
+        public async Task CreateAsync(Film film)
+        {
+
+        }
+
+        public async Task UpdateAsync(Film film)
+        {
+
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+
+        }
     }
+}
