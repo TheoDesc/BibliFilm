@@ -1,13 +1,56 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<BibliFilm.Models.Entities.Film>
+@functions {
+    static string Initials(string? name)
+    {
+        var parts = (name ?? string.Empty).Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        if (parts.Length == 0) return "?";
+        if (parts.Length == 1) return parts[0].Substring(0, 1).ToUpperInvariant();
+        return (parts[0].Substring(0, 1) + parts[parts.Length - 1].Substring(0, 1)).ToUpperInvariant();
+    }
+}
+@{
+    ViewData["Title"] = "Film";
+    var films = Model.ToList(); //ça marche pas
+    var total = films.Count;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Salut, bienvenue dans bibliothèque</h1>
-    <div class="film-card"><h2>Nom</h2>
-        <div class="film-info"><p>Date de sortie : </p><p> - </p><p>Note / 5</p></div>
-        <p>Descrption</p>
-        <img src="" />
+<div class="page-header fade-up">
+    <div>
+        <h1>Étudiants</h1>
+        <p class="text-body-secondary mb-0">Salut, bienvenue dans bibliothèque</p>
     </div>
 </div>
 
+@foreach (var film in films)
+{
+    <div class="text-center">
+        <div class="film-card">
+            <h2>@{
+                    Html.DisplayFor(modelItem => film.Name);
+                }
+             </h2>
+            <div class="film-info"><p>Date de sortie : </p><p> - </p><p>Note / 5</p></div>
+            <p>Descrption</p>
+            <img src="" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        var searchInput = document.getElementById('studentSearch');
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                var query = searchInput.value.trim().toLowerCase();
+                var visible = 0;
+                document.querySelectorAll('.fiml-card').forEach(function (row) {
+                    var match = row.getAttribute('data-search').indexOf(query) !== -1;
+                    row.classList.toggle('d-none', !match);
+                    if (match) { visible++; }
+                });
+                document.getElementById('resultCount').textContent = visible;
+                document.getElementById('noResult').classList.toggle('d-none', visible !== 0);
+            });
+        }
+    </script>
+}
