@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BibliFilm.Models.Entities.Film>
+﻿@model List<BibliFilm.Models.Entities.Film>
 @functions {
     static string Initials(string? name)
     {
@@ -8,11 +8,6 @@
         return (parts[0].Substring(0, 1) + parts[parts.Length - 1].Substring(0, 1)).ToUpperInvariant();
     }
 }
-@{
-    ViewData["Title"] = "Film";
-    var films = Model.ToList(); //ça marche pas
-    var total = films.Count;
-}
 
 <div class="page-header fade-up">
     <div>
@@ -21,7 +16,7 @@
     </div>
 </div>
 
-@foreach (var film in films)
+@foreach (var film in Model)
 {
     <div class="text-center">
         <div class="film-card">
