@@ -16,6 +16,10 @@ namespace BibliFilm.Models.Entities
         [Display(Name = "Description")]
         public string Description { get; set; } = string.Empty;
 
+        public string Realisateur { get; set; } = string.Empty;
+
+        public string Genre { get; set; } = string.Empty;
+
         public string Image { get; set; } = string.Empty;
 
 
