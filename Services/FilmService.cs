@@ -7,12 +7,14 @@ namespace BibliFilm.Services
         public FilmService(FilmContext context)
         {
             _context = context;
-        }
 
-        public async Task<List<Film>> GetAllAsync() => await _context.Film
+         public async Task<List<Film>> GetAllAsync() => await _context.Film
                 .AsNoTracking()
                 .OrderBy(s => s.Name)
                 .ToListAsync();
 
-        public async Task<Film?> GetByIdAsync(Guid id) => await _context.Films.FindAsync(id);
+         public async Task<Film?> GetByIdAsync(Guid id) => await _context.Films.FindAsync(id);
+        }
+
+       
     }
